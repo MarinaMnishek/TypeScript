@@ -19,7 +19,6 @@ const favoritesAmount = localStorage.getItem('favoritesAmount')
 
 
 window.addEventListener('DOMContentLoaded', () => {
-  // renderUserBlock(user.userName, user.linkToAvatar, favoritesAmount)
   renderUserBlock(getUserData(user),getFavoritesAmount (favoritesAmount))
   renderSearchFormBlock(checkInDateValue, checkOutDateValue)
   renderSearchStubBlock()

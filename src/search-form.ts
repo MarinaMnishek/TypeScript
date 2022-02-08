@@ -1,5 +1,6 @@
-import { renderBlock } from './lib.js'
+import {renderBlock} from './lib.js'
 
+// date in inputs
 const dateNow = new Date;
 const dateIn = new Date;
 const dateOut = new Date;
@@ -10,18 +11,48 @@ dateOut.setDate(dateOut.getDate() + 3);
 export const checkInDateValue = dateIn.toISOString().slice(0, 10);
 export const checkOutDateValue = dateOut.toISOString().slice(0, 10);
 
-const checkInDateMin= dateNow.toISOString().slice(0, 10);
-const lastDayOfMonth = new Date(dateNow.getFullYear(),dateNow.getMonth()+2,1)
+const checkInDateMin = dateNow.toISOString().slice(0, 10);
+const lastDayOfMonth = new Date(dateNow.getFullYear(), dateNow.getMonth() + 2, 1)
 const checkInDateMax = lastDayOfMonth.toISOString().slice(0, 10);
 
 
 
+//results from input in searchForm
 
-export function renderSearchFormBlock (checkInDate:string, checkOutDate:string) {
+interface SearchFormData {
+  checkInDate: string
+  checkOutDate: string
+  maxPrice: string
+}
+
+function handleForm(e){
+  const dateIn = (document.getElementById('check-in-date') as HTMLInputElement).value
+  const dateOut = (document.getElementById('check-out-date') as HTMLInputElement).value
+  const maxPrice = (document.getElementById('max-price') as HTMLInputElement).value
+  e.preventDefault()
+
+
+  let searchFormData:SearchFormData = {
+    checkInDate: dateIn,
+    checkOutDate: dateOut,
+    maxPrice: maxPrice
+  }
+
+  searchForm(searchFormData)
+
+}
+
+function searchForm(searchFormData: SearchFormData):void {
+  const result = `Дата заезда: ${searchFormData.checkInDate} \nДата выезда: ${searchFormData.checkOutDate} \nМаксимальная цена суток: ${searchFormData.maxPrice}`
+  console.log( result)
+}
+
+
+export function renderSearchFormBlock(checkInDate: string, checkOutDate: string) {
   renderBlock(
     'search-form-block',
     `
-    <form>
+    <form action="/" method="#" >
       <fieldset class="search-filedset">
         <div class="row">
           <div>
@@ -57,4 +88,13 @@ export function renderSearchFormBlock (checkInDate:string, checkOutDate:string) 
     </form>
     `
   )
+
+
+
+  const form = document.querySelector('form')
+  form.addEventListener('submit', handleForm)
+
 }
+
+
+

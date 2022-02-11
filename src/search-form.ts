@@ -43,7 +43,8 @@ function handleForm(e){
 }
 
 function searchForm(searchFormData: SearchFormData):void {
-  const result = `Дата заезда: ${searchFormData.checkInDate} \nДата выезда: ${searchFormData.checkOutDate} \nМаксимальная цена суток: ${searchFormData.maxPrice}`
+  const result = `Дата заезда: ${searchFormData.checkInDate} \n
+  Дата выезда: ${searchFormData.checkOutDate} \nМаксимальная цена суток: ${searchFormData.maxPrice}`
   console.log( result)
 }
 

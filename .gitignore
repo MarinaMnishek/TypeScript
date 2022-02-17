@@ -1,2 +1,14 @@
 node_modules
 public/scripts
+
+/tsconfig-dev.json
+/tsconfig.json
+/package-lock.json
+/package.json
+/null
+/.eslintrc
+/.editorconfig
+/src/user.ts
+/src/search-results.ts
+/src/search-form.ts
+/src/lib.ts

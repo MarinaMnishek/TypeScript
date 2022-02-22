@@ -1,9 +1,8 @@
 import { renderSearchFormBlock } from './search-form.js'
 import { renderSearchStubBlock } from './search-results.js'
 import {getUserData, getFavoritesAmount, renderUserBlock} from './user.js'
-import {checkInDateValue} from './search-form.js';
-import {checkOutDateValue} from './search-form.js';
-// import { renderToast } from './lib.js'
+import { renderToast } from './lib.js'
+
 
 
 
@@ -14,20 +13,18 @@ import {checkOutDateValue} from './search-form.js';
 // let favoriteItemsAmount = 2;
 // localStorage.setItem('user', JSON.stringify(object));
 // localStorage.setItem('favoritesAmount', favoriteItemsAmount.toString());
-const user = JSON.parse(localStorage.getItem('user'));
-const favoritesAmount = localStorage.getItem('favoritesAmount')
+const user = JSON.parse(localStorage.getItem('user') || '{}');
+const favoritesAmount:string|number|null = localStorage.getItem('favoritesAmount')
 
 
 window.addEventListener('DOMContentLoaded', () => {
-  renderUserBlock(getUserData(user),getFavoritesAmount (favoritesAmount))
-  renderSearchFormBlock(checkInDateValue, checkOutDateValue)
+  renderUserBlock(getUserData(user), getFavoritesAmount (favoritesAmount))
+  renderSearchFormBlock()
   renderSearchStubBlock()
-  // renderToast(
-  //     {text: 'Это пример уведомления. Используйте его при необходимости', type: 'success'},
-  //     {name: 'Понял', handler: () => {console.log('Уведомление закрыто')}}
-  // )
-
-
+  renderToast(
+      {text: 'Это пример уведомления. Используйте его при необходимости', type: 'success'},
+      {name: 'Понял', handler: () => {console.log('Уведомление закрыто')}}
+  )
 
 })
 

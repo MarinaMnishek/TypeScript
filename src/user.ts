@@ -2,7 +2,7 @@ import {renderBlock} from './lib.js'
 
 
 
-export function getUserData(user: unknown) {
+export function getUserData(user: User|null) {
   if (user === null) {
     user = {
       userName: 'имя пользователя не найдено',
@@ -12,7 +12,7 @@ export function getUserData(user: unknown) {
   return user
 }
 
-export function getFavoritesAmount(favoritesAmount: unknown) {
+export function getFavoritesAmount(favoritesAmount: string |number| null) {
 
   if (favoritesAmount !== '') {
     favoritesAmount = Number(localStorage.getItem('favoritesAmount'))
@@ -20,11 +20,18 @@ export function getFavoritesAmount(favoritesAmount: unknown) {
   return favoritesAmount
 }
 
+export interface User {
+  userName: string,
+  linkToAvatar: string
+}
 
-export function renderUserBlock(user, favoriteItemsAmount) {
+export function renderUserBlock(user: User|null, favoriteItemsAmount: string|number|null) {
 
   const favoritesCaption = favoriteItemsAmount ? favoriteItemsAmount : 'ничего нет'
   const hasFavoriteItems = favoriteItemsAmount ? true : false
+if (user ===null){
+  return console.log('Something went wrong...')
+}
 
   renderBlock(
     'user-block',

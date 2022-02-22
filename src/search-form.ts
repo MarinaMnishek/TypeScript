@@ -11,9 +11,7 @@ dateOut.setDate(dateOut.getDate() + 3);
 export const checkInDateValue = dateIn.toISOString().slice(0, 10);
 export const checkOutDateValue = dateOut.toISOString().slice(0, 10);
 
-const checkInDateMin = dateNow.toISOString().slice(0, 10);
-const lastDayOfMonth = new Date(dateNow.getFullYear(), dateNow.getMonth() + 2, 1)
-const checkInDateMax = lastDayOfMonth.toISOString().slice(0, 10);
+
 
 
 
@@ -25,7 +23,7 @@ interface SearchFormData {
   maxPrice: string
 }
 
-function handleForm(e){
+function handleForm(e:any){
   const dateIn = (document.getElementById('check-in-date') as HTMLInputElement).value
   const dateOut = (document.getElementById('check-out-date') as HTMLInputElement).value
   const maxPrice = (document.getElementById('max-price') as HTMLInputElement).value
@@ -48,7 +46,12 @@ function searchForm(searchFormData: SearchFormData):void {
 }
 
 
-export function renderSearchFormBlock(checkInDate: string, checkOutDate: string) {
+export function renderSearchFormBlock() {
+
+  const checkInDateMin = dateNow.toISOString().slice(0, 10);
+  const lastDayOfMonth = new Date(dateNow.getFullYear(), dateNow.getMonth() + 2, 1)
+  const checkInDateMax = lastDayOfMonth.toISOString().slice(0, 10);
+
   renderBlock(
     'search-form-block',
     `
@@ -60,10 +63,6 @@ export function renderSearchFormBlock(checkInDate: string, checkOutDate: string)
             <input id="city" type="text" disabled value="Санкт-Петербург" />
             <input type="hidden" disabled value="59.9386,30.3141" />
           </div>
-          <!--<div class="providers">
-            <label><input type="checkbox" name="provider" value="homy" checked /> Homy</label>
-            <label><input type="checkbox" name="provider" value="flat-rent" checked /> FlatRent</label>
-          </div>-->
         </div>
         <div class="row">
           <div>
@@ -92,6 +91,9 @@ export function renderSearchFormBlock(checkInDate: string, checkOutDate: string)
 
 
   const form = document.querySelector('form')
+  if (form === null) {
+    return console.log('Something')
+  }
   form.addEventListener('submit', handleForm)
 
 }
